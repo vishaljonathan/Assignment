@@ -170,3 +170,5 @@ SELECT *FROM Courses;
 SELECT *FROM Teacher;
 SELECT *FROM Enrollments;
 SELECT *FROM Payments;
+
+SELECT *FROM Students;
