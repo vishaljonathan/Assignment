@@ -32,3 +32,17 @@ UPDATE Courses SET Teacher = 108 WHERE course_id = 201;
 
 --Display the course table after updating
 SELECT *FROM Courses;
+
+--Delete a specific student from the Students table and remove all their enrollment records from the Enrollments table
+DELETE FROM Enrollments where Students = 11 AND Courses = 206;
+DELETE FROM Students where student_id = 11;
+
+--Display the enrollment and student table after deleting a specific student
+SELECT *FROM Students;
+SELECT *FROM Enrollments;
+
+--Update the payment amount for a specific payment record in the Payments table
+UPDATE Payments SET amount = 85000 WHERE Students = 10;
+
+--Display the payment table after updating a specific record
+SELECT *FROM Payments;
