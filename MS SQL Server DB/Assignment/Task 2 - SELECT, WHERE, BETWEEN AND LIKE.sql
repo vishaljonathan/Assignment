@@ -32,17 +32,3 @@ UPDATE Courses SET Teacher = 108 WHERE course_id = 201;
 
 --Display the course table after updating
 SELECT *FROM Courses;
-
---Delete a specific student from the students table and remove all their details from the enrollment table
-DELETE FROM Students WHERE student_id = 11;
-DELETE FROM Enrollments WHERE Students = 11;
-
-
-
-
-
-SELECT *FROM Students;
-SELECT *FROM Courses;
-SELECT *FROM Enrollments;
-SELECT *FROM Teacher;
-SELECT *FROM Payments;
