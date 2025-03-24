@@ -72,7 +72,7 @@ VALUES ('Jerlin','Trixie','2003-10-28','jerlintrixie@gmail.com','8249997831');
 INSERT INTO Students(first_name,last_name,date_of_birth,e_mail,phone_number)
 VALUES ('Shivani','Suvatheka','2003-10-12','shivanisuvatheka@gmail.com','8350007932');
 INSERT INTO Students(first_name,last_name,date_of_birth,e_mail,phone_number)
-VALUES ('Sarah','Martin','2004-09-12','sarah.martin@gmail.com','9852973959');
+
 
 --Display Student Table after inserting values
 SELECT *FROM Students;
@@ -128,6 +128,8 @@ INSERT INTO Enrollments(Students,Courses,enrollment_date)
 VALUES(1,200,'2021-11-15');
 INSERT INTO Enrollments(Students,Courses,enrollment_date)
 VALUES(2,201,'2021-11-02');
+INSERT INTO Enrollments(Students,Courses,enrollment_date)
+VALUES(2,200,'2021-11-02');
 INSERT INTO Enrollments(Students,Courses,enrollment_date)
 VALUES(3,202,'2021-10-04');
 INSERT INTO Enrollments(Students,Courses,enrollment_date)

@@ -12,7 +12,7 @@ JOIN Payments as p ON p.Students = s.student_id
 WHERE p.amount = (SELECT MAX(amount) FROM Payments);
 
 --List of courses with the highest number of enrollments
-
+SELECT c.course_name AS Course_Name FROM Courses as c WHERE c.course_id IN (SELECT Courses FROM Enrollments GROUP BY Courses HAVING COUNT(Courses)>1);
 
 --Total payments made to courses taught by each teacher
 SELECT t.teacher_id AS Teacher_ID, t.first_name AS First_Name, t.last_name AS Last_Name, 
@@ -69,4 +69,11 @@ LEFT JOIN Enrollments AS e ON c.course_id = e.Courses
 GROUP BY c.course_name;
 
  --Average payment amount made by students
+SELECT AVG(student_avg) AS Total_Average_Payment
+FROM (
+    SELECT s.student_id, AVG(p.amount) AS student_avg
+    FROM Students s
+    JOIN Payments p ON s.student_id = p.Students
+    GROUP BY s.student_id
+) AS t;
 
