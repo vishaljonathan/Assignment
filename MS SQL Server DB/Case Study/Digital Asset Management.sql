@@ -70,16 +70,16 @@ cost INT
 
 --Insert values into Maintenance Record Table
 INSERT INTO maintenance_record (asset_id, maintenance_date, description, cost) VALUES
-(202, '2024-03-15', 'Vehicle servicing and oil change', 150),
-(203, '2024-02-20', 'Printer toner replacement', 50),
-(206, '2024-02-28', 'Monitor calibration and checkup', 30),
-(209, '2024-03-05', 'Smartphone battery replacement', 60),
-(204, '2024-03-10', 'Projector lens cleaning', 40),
-(205, '2024-01-18', 'Tablet software update', 25),
-(207, '2023-11-22', 'Camera firmware update', 35),
-(208, '2024-03-12', 'Laptop software optimization', 45),
-(210, '2023-12-15', 'Speaker sound system check', 20),
-(201, '2024-01-25', 'Laptop hardware inspection', 100);
+(201, '2024-03-15', 'Vehicle servicing and oil change', 150),
+(202, '2024-02-20', 'Printer toner replacement', 50),
+(205, '2024-02-28', 'Monitor calibration and checkup', 30),
+(208, '2024-03-05', 'Smartphone battery replacement', 60),
+(203, '2024-03-10', 'Projector lens cleaning', 40),
+(204, '2024-01-18', 'Tablet software update', 25),
+(206, '2023-11-22', 'Camera firmware update', 35),
+(200, '2024-03-12', 'Laptop software optimization', 45),
+(209, '2023-12-15', 'Speaker sound system check', 20),
+(207, '2024-01-25', 'Laptop hardware inspection', 100);
 
 --Display Maintenance Record Table
 SELECT *FROM maintenance_record;
@@ -97,16 +97,16 @@ return_date DATE
 
 --Insert values into Asset Allocation Table
 INSERT INTO asset_allocation (asset_id, employee_id, allocation_date, return_date) VALUES
-(201, 100, '2024-01-10', NULL),
-(202, 101, '2024-01-15', '2024-03-01'),
-(203, 102, '2024-02-15', NULL),
-(204, 103, '2024-03-01', '2024-03-10'),
-(205, 104, '2024-01-10', NULL),
-(206, 105, '2024-02-10', NULL),
-(207, 106, '2023-09-01', NULL),
-(208, 107, '2024-03-20', NULL),
-(209, 108, '2023-05-10', '2024-02-28'),
-(210, 109, '2023-12-05', NULL);
+(200, 100, '2024-01-10', NULL),
+(201, 101, '2024-01-15', '2024-03-01'),
+(202, 102, '2024-02-15', NULL),
+(203, 103, '2024-03-01', '2024-03-10'),
+(204, 104, '2024-01-10', NULL),
+(205, 105, '2024-02-10', NULL),
+(206, 106, '2023-09-01', NULL),
+(207, 107, '2024-03-20', NULL),
+(208, 108, '2023-05-10', '2024-02-28'),
+(209, 109, '2023-12-05', NULL);
 
 --Display Asset Allocation Table
 SELECT *FROM asset_allocation;
@@ -126,16 +126,16 @@ status VARCHAR(50)
 
 --Insert values into Reservations Table
 INSERT INTO reservations (asset_id, employee_id, reservation_date, start_date, end_date, status) VALUES
-(201, 100, '2024-01-05', '2024-01-10', '2024-01-15', 'Approved'),
-(202, 101, '2024-03-01', '2024-03-05', '2024-03-10', 'Pending'),
-(203, 102, '2024-02-10', '2024-02-15', '2024-02-20', 'Approved'),
-(204, 103, '2024-02-20', '2024-02-25', '2024-03-01', 'Canceled'),
-(205, 104, '2024-01-10', '2024-01-15', '2024-01-20', 'Approved'),
-(206, 105, '2024-02-05', '2024-02-10', '2024-02-15', 'Pending'),
-(207, 106, '2023-08-15', '2023-09-01', '2023-09-10', 'Approved'),
-(208, 107, '2024-03-18', '2024-03-20', '2024-03-25', 'Pending'),
-(209, 108, '2024-02-20', '2024-02-25', '2024-03-01', 'Approved'),
-(210, 109, '2023-11-30', '2023-12-05', '2023-12-10', 'Approved');
+(200, 100, '2024-01-05', '2024-01-10', '2024-01-15', 'Approved'),
+(201, 101, '2024-03-01', '2024-03-05', '2024-03-10', 'Pending'),
+(202, 102, '2024-02-10', '2024-02-15', '2024-02-20', 'Approved'),
+(203, 103, '2024-02-20', '2024-02-25', '2024-03-01', 'Canceled'),
+(204, 104, '2024-01-10', '2024-01-15', '2024-01-20', 'Approved'),
+(205, 105, '2024-02-05', '2024-02-10', '2024-02-15', 'Pending'),
+(206, 106, '2023-08-15', '2023-09-01', '2023-09-10', 'Approved'),
+(207, 107, '2024-03-18', '2024-03-20', '2024-03-25', 'Pending'),
+(208, 108, '2024-02-20', '2024-02-25', '2024-03-01', 'Approved'),
+(209, 109, '2023-11-30', '2023-12-05', '2023-12-10', 'Approved');
 
 --Display Reservations Table
 SELECT *FROM reservations;
@@ -143,6 +143,6 @@ SELECT *FROM reservations;
 --Display all tables
 SELECT *FROM employees;
 SELECT *FROM assets;
-SELECT *FROM asset_allocation;
 SELECT *FROM maintenance_record;
+SELECT *FROM asset_allocation;
 SELECT *FROM reservations;
