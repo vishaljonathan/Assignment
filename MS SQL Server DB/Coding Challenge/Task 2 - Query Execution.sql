@@ -30,9 +30,10 @@ FROM customers AS c
 JOIN orders AS o ON c.customer_id = o.Customer_Id  
 WHERE YEAR(o.order_date) = 2023;
 
---Minimum stock quantity for each category
-SELECT MIN(stockQuantity) AS min_stock_quantity  
-FROM products;
+--Minimum stock quantity for each product category
+SELECT product_id AS Product_ID, name as Product_Name, MIN(stockQuantity) AS Min_Stock_Quantity  
+FROM products  
+GROUP BY product_id, name;
 
 --Total amount spent by each customer
 SELECT c.customer_id AS Customer_ID, c.name AS Name, SUM(o.total_price) AS Total_Amount_Spent
