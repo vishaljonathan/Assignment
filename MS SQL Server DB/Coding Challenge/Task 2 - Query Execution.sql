@@ -7,6 +7,16 @@ UPDATE products SET price = 800.00 WHERE product_id = 7;
 --Remove all cart items for a specific customer
 DELETE FROM Cart WHERE customer_id = 5;
 
+--Subquery to remove all cart items for a specific customer
+DELETE FROM Cart  
+WHERE customer_id = (SELECT customer_id FROM customers WHERE customer_id = 6); 
+
+--Subquery without WHERE to remove all cart items for a specific customer
+DELETE FROM Cart  
+WHERE customer_id IN (SELECT customer_id FROM customers) AND customer_id = 6;  
+SELECT *FROM cart;
+
+
 --Retrieve products priced below 100
 SELECT product_id AS Product_ID, name as Product_Name, description as Description, price AS Price FROM products
 WHERE price<100;
