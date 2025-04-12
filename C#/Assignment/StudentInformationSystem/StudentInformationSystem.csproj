@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\Course.cs" />
+    <Compile Include="Entity\Enrollment.cs" />
     <Compile Include="Entity\Student.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
