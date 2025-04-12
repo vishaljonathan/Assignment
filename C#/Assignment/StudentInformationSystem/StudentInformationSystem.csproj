@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Entity\Course.cs" />
     <Compile Include="Entity\Enrollment.cs" />
+    <Compile Include="Entity\Payment.cs" />
     <Compile Include="Entity\Student.cs" />
     <Compile Include="Entity\Teacher.cs" />
     <Compile Include="Program.cs" />
