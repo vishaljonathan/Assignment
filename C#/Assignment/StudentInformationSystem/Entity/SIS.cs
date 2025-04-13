@@ -59,6 +59,5 @@ namespace StudentInformationSystem.Entity
 
             Console.WriteLine($"Statistics for {course.CourseName}:\n - Total Enrollments: {totalEnrollments}\n - Total Payments: {totalPayments:C}");
         }
-
     }
 }
