@@ -20,5 +20,15 @@ namespace StudentInformationSystem.Entity
             EnrolledCourseID = course;
             EnrollmentDate = date;
         }
+
+        public Student GetStudent()
+        {
+            return EnrolledStudentName;
+        }
+
+        public Course GetCourse()
+        {
+            return EnrolledCourseID;
+        }
     }
 }
