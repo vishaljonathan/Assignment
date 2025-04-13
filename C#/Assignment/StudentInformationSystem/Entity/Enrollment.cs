@@ -19,5 +19,7 @@ namespace StudentInformationSystem.Entity
             Course = course;
             EnrollmentDate = enrollmentDate;
         }
+        public Student GetStudent() => Student;
+        public Course GetCourse() => Course;
     }
 }
