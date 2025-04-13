@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StudentInformationSystem.Exception
 {
-    public class DuplicateEnrollmentException
+    public class DuplicateEnrollmentException : System.Exception
     {
         public DuplicateEnrollmentException(string message) : base(message) { }
     }

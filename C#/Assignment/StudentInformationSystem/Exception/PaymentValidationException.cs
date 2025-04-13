@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StudentInformationSystem.Exception
 {
-    public class PaymentValidationException
+    public class PaymentValidationException : System.Exception
     {
         public PaymentValidationException(string message) : base(message) { }
     }

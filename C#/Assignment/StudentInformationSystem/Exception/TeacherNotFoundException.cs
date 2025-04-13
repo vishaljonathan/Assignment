@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StudentInformationSystem.Exception
 {
-    public class TeacherNotFoundException
+    public class TeacherNotFoundException : System.Exception
     {
         public TeacherNotFoundException(string message) : base(message) { }
     }

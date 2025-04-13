@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StudentInformationSystem.Exception
 {
-    public class CourseNotFoundException
+    public class CourseNotFoundException : System.Exception
     {
         public CourseNotFoundException(string message) : base(message) { }
     }

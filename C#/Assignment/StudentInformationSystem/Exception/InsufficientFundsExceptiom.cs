@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace StudentInformationSystem.Exception
 {
-    public class InsufficientFundsExceptiom
+    public class InsufficientFundsException : System.Exception
     {
-        public InsufficientFundsExceptiom(string message) : base(message) { }
+        public InsufficientFundsException(string message) : base(message) { }
     }
 }

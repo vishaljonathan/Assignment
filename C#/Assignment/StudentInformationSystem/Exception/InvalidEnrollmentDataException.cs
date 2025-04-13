@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StudentInformationSystem.Exception
 {
-    public class InvalidEnrollmentDataException
+    public class InvalidEnrollmentDataException : System.Exception
     {
         public InvalidEnrollmentDataException(string message) : base(message) { }
     }
