@@ -14,5 +14,14 @@ namespace StudentInformationSystem.Entity
         public DateTime DateOfBirth { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
+        public Student(int studentID, string firstName, string lastName, DateTime dob, string email, string phone)
+        {
+            StudentID = studentID;
+            FirstName = firstName;
+            LastName = lastName;
+            DateOfBirth = dob;
+            Email = email;
+            PhoneNumber = phone;
+        }
     }
 }

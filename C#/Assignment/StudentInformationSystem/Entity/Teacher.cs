@@ -12,5 +12,12 @@ namespace StudentInformationSystem.Entity
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
+        public Teacher(int teacherID, string firstName, string lastName, string email)
+        {
+            TeacherID = teacherID;
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+        }
     }
 }
