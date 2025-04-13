@@ -59,6 +59,7 @@
     <Compile Include="Exception\PaymentValidationException.cs" />
     <Compile Include="Exception\StudentNotFoundException.cs" />
     <Compile Include="Exception\TeacherNotFoundException.cs" />
+    <Compile Include="Main\Program.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -67,7 +68,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DAO\" />
-    <Folder Include="Main\" />
     <Folder Include="Util\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

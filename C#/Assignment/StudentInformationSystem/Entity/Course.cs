@@ -22,6 +22,11 @@ namespace StudentInformationSystem.Entity
             InstructorName = instructorName;
             Enrollments = new List<Enrollment>();
         }
+
+        public Course(string v1, string v2)
+        {
+        }
+
         public void AssignTeacher(Teacher teacher)
         {
             AssignedTeacher = teacher;

@@ -81,5 +81,25 @@ namespace StudentInformationSystem.Entity
             student.Payments.Add(payment);
             Payments.Add(payment);
         }
+
+        internal void AssignCourseToTeacher(Course course1, Teacher teacher1)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void AddEnrollment(Student student1, Course course1, DateTime now)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal IEnumerable<object> GetEnrollmentsForStudent(Student student1)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal IEnumerable<object> GetCoursesForTeacher(Teacher teacher1)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

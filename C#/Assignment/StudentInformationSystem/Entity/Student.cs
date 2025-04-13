@@ -28,6 +28,11 @@ namespace StudentInformationSystem.Entity
             Enrollments = new List<Enrollment>();
             Payments = new List<Payment>();
         }
+
+        public Student(int v1, string v2, string v3, string v4, string v5)
+        {
+        }
+
         public void EnrollInCourse(Course course)
         {
             Enrollment enrollment = new Enrollment(GenerateID(), this, course, DateTime.Now);
