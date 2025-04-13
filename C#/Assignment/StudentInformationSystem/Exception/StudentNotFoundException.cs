@@ -8,9 +8,6 @@ namespace StudentInformationSystem.Exception
 {
     public class StudentNotFoundException:System.Exception
     {
-        public StudentNotFoundException(string message) : base(message) 
-        { 
-        
-        }
+        public StudentNotFoundException(string message) : base(message) { }
     }
 }
