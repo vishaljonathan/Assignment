@@ -19,6 +19,14 @@ namespace StudentInformationSystem.Entity
             Amount = amount;
             PaymentDate = paymentDate;
         }
+
+        public Payment(Student student, decimal amount, DateTime paymentDate)
+        {
+            Student = student;
+            Amount = amount;
+            PaymentDate = paymentDate;
+        }
+
         public Student GetStudent() => Student;
         public decimal GetPaymentAmount() => Amount;
         public DateTime GetPaymentDate() => PaymentDate;

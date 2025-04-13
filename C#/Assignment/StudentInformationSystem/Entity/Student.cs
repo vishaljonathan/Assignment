@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StudentInformationSystem.Exception;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,7 +44,17 @@ namespace StudentInformationSystem.Entity
         }
         public void MakePayment(decimal amount, DateTime paymentDate)
         {
-            Payments.Add(new Payment(GenerateID(), this, amount, paymentDate));
+            // Validate payment amount
+            if (amount <= 0)
+                throw new PaymentValidationException("Payment amount must be greater than zero.");
+
+            // Validate payment date
+            if (paymentDate > DateTime.Now)
+                throw new PaymentValidationException("Payment date cannot be in the future.");
+
+            // Create payment and add it to the student's payment list
+            Payment payment = new Payment(this, amount, paymentDate);
+            Payments.Add(payment);
         }
         public void DisplayStudentInfo()
         {

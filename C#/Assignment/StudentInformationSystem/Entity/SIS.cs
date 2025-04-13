@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StudentInformationSystem.Exception;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,8 +24,20 @@ namespace StudentInformationSystem.Entity
         }
         public void EnrollStudentInCourse(Student student, Course course)
         {
-            student.EnrollInCourse(course);
-            Enrollments.Add(new Enrollment(new Random().Next(1000, 9999), student, course, DateTime.Now));
+            if (!Students.Contains(student))
+                throw new StudentNotFoundException("Student not found in the system!");
+
+            if (!Courses.Contains(course))
+                throw new CourseNotFoundException("Course not found in the system!");
+
+            if (Enrollments.Any(e => e.Student == student && e.Course == course))
+                throw new DuplicateEnrollmentException("Student is already enrolled in this course.");
+
+            Enrollment newEnrollment = new Enrollment(student, course, DateTime.Now);
+
+            Enrollments.Add(newEnrollment);
+            student.Enrollments.Add(newEnrollment);
+            course.Enrollments.Add(newEnrollment);
         }
         public void AssignTeacherToCourse(Teacher teacher, Course course)
         {
@@ -58,6 +71,15 @@ namespace StudentInformationSystem.Entity
                 e.Student.GetPaymentHistory().Sum(p => p.Amount));
 
             Console.WriteLine($"Statistics for {course.CourseName}:\n - Total Enrollments: {totalEnrollments}\n - Total Payments: {totalPayments:C}");
+        }
+        public void AddPayment(Student student, decimal amount, DateTime paymentDate)
+        {
+            if (amount <= 0)
+                throw new PaymentValidationException("Payment amount must be greater than zero.");
+
+            var payment = new Payment(student, amount, paymentDate);
+            student.Payments.Add(payment);
+            Payments.Add(payment);
         }
     }
 }
