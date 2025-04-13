@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B0412DE7-DF13-45B1-ADA7-372C607A76F0}</ProjectGuid>
+    <ProjectGuid>{F7925120-8D3B-4B5E-B56E-AE5B8CD56D17}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>StudentInformationSystem</RootNamespace>
     <AssemblyName>StudentInformationSystem</AssemblyName>
@@ -53,12 +53,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DAO\" />
-    <Folder Include="Exception\" />
-    <Folder Include="Main\" />
-    <Folder Include="Util\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

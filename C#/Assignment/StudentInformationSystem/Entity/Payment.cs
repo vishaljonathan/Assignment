@@ -6,34 +6,11 @@ using System.Threading.Tasks;
 
 namespace StudentInformationSystem.Entity
 {
-    class Payment
+    public class Payment
     {
-        public long PaymentID { get; set; }
-        public Student PayingStudent { get; set; }
+        public int PaymentID { get; set; }
+        public Student Student { get; set; }
         public decimal Amount { get; set; }
         public DateTime PaymentDate { get; set; }
-        
-        public Payment(long payment, Student student, decimal amount, DateTime date)
-        {
-            PaymentID = payment;
-            PayingStudent = student;
-            Amount = amount;
-            PaymentDate = date;
-        }
-
-        public Student GetStudent()
-        {
-            return PayingStudent;
-        }
-
-        public decimal GetPaymentAmount()
-        {
-            return Amount;
-        }
-
-        public DateTime GetPaymentDate()
-        {
-            return PaymentDate;
-        }
     }
 }
