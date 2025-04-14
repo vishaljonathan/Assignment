@@ -49,16 +49,7 @@
     <Compile Include="Entity\SIS.cs" />
     <Compile Include="Entity\Student.cs" />
     <Compile Include="Entity\Teacher.cs" />
-    <Compile Include="Exception\CourseNotFoundException.cs" />
-    <Compile Include="Exception\DuplicateEnrollmentException.cs" />
-    <Compile Include="Exception\InsufficientFundsException.cs" />
-    <Compile Include="Exception\InvalidCourseDataException.cs" />
-    <Compile Include="Exception\InvalidEnrollmentDataException.cs" />
-    <Compile Include="Exception\InvalidStudentDataException.cs" />
-    <Compile Include="Exception\InvalidTeacherDataException.cs" />
-    <Compile Include="Exception\PaymentValidationException.cs" />
-    <Compile Include="Exception\StudentNotFoundException.cs" />
-    <Compile Include="Exception\TeacherNotFoundException.cs" />
+    <Compile Include="Exception\Exceptions.cs" />
     <Compile Include="Main\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

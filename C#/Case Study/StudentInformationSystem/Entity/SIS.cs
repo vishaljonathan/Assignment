@@ -1,4 +1,4 @@
-﻿using StudentInformationSystem.Exception;
+﻿using static StudentInformationSystem.Exception.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
