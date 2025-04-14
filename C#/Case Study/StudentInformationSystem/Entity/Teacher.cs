@@ -8,18 +8,40 @@ namespace StudentInformationSystem.Entity
 {
     public class Teacher
     {
-        public int TeacherID { get; set; }
+        public int TeacherId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
 
-        //Implement Constructors
-        public Teacher(int Id, String Firstname, String Lastname, string email)
+        public List<Course> AssignedCourses { get; set; }
+
+        // Constructor to initialize attributes
+        public Teacher(int teacherId, string firstName, string lastName, string email)
         {
-            TeacherID = Id;
-            FirstName = Firstname;
-            LastName = Lastname;
+            TeacherId = teacherId;
+            FirstName = firstName;
+            LastName = lastName;
             Email = email;
+        }
+        public Teacher()
+        {
+            AssignedCourses = new List<Course>();
+        }
+
+        // Methods
+        public void UpdateTeacherInfo(string name, string email, string expertise)
+        {
+            FirstName = name.Split(' ')[0];
+            LastName = name.Split(' ')[1];
+            Email = email;
+        }
+        public void DisplayTeacherInfo()
+        {
+            Console.WriteLine($"Teacher ID: {TeacherId}, Name: {FirstName} {LastName}, Email: {Email}");
+        }
+        public List<Course> GetAssignedCourses()
+        {
+            return new List<Course> { new Course(1, "Math 101", "MTH101", "Dr. Smith") };
         }
     }
 }

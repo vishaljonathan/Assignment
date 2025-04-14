@@ -8,18 +8,38 @@ namespace StudentInformationSystem.Entity
 {
     public class Payment
     {
-        public int PaymentID { get; set; }
-        public Student Studentid { get; set; }
+        public int PaymentId { get; set; }
+        public int StudentId { get; set; }
         public decimal Amount { get; set; }
         public DateTime PaymentDate { get; set; }
 
-        //Implement Constructors
-        public Payment(int Id, Student S_Id, decimal amnt, DateTime payment_date)
+        public Student Student { get; set; }
+
+        // Constructor to initialize attributes
+        public Payment(int paymentId, int studentId, decimal amount, DateTime paymentDate)
         {
-            PaymentID = Id;
-            Studentid = S_Id;
-            Amount = amnt;
-            PaymentDate = payment_date;
+            PaymentId = paymentId;
+            StudentId = studentId;
+            Amount = amount;
+            PaymentDate = paymentDate;
+        }
+        public Payment(Student student)
+        {
+            Student = student;
+        }
+
+        // Methods
+        public Student GetStudent()
+        {
+            return new Student(StudentId, "John", "Doe", DateTime.Now.AddYears(-20), "john.doe@mail.com", "1234567890");
+        }
+        public decimal GetPaymentAmount()
+        {
+            return Amount;
+        }
+        public DateTime GetPaymentDate()
+        {
+            return PaymentDate;
         }
     }
 }

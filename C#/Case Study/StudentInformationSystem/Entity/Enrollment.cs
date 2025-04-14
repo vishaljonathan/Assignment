@@ -8,19 +8,38 @@ namespace StudentInformationSystem.Entity
 {
     public class Enrollment
     {
-        public int EnrollmentID { get; set; }
-        public Student StudentId { get; set; }
-        public Course CourseId { get; set; }
+        public int EnrollmentId { get; set; }
+        public int StudentId { get; set; }
+        public int CourseId { get; set; }
         public DateTime EnrollmentDate { get; set; }
 
-        //Implement Constructors
-        public Enrollment(int Id, Student s_id, Course c_id, DateTime e_date)
+        public Student Student { get; set; }
+        public Course Course { get; set; }
+
+        // Constructor to initialize attributes
+        public Enrollment(int enrollmentId, int studentId, int courseId, DateTime enrollmentDate)
         {
-            EnrollmentID = Id;
-            StudentId = s_id;
-            CourseId = c_id;
-            EnrollmentDate = e_date;
+            EnrollmentId = enrollmentId;
+            StudentId = studentId;
+            CourseId = courseId;
+            EnrollmentDate = enrollmentDate;
         }
-        
+        public Enrollment(Student student, Course course)
+        {
+            Student = student;
+            Course = course;
+        }
+
+        // Methods
+        public Student GetStudent()
+        {
+            // Retrieve student based on StudentId (assuming data source or service)
+            return new Student(StudentId, "John", "Doe", DateTime.Now.AddYears(-20), "john.doe@mail.com", "1234567890");
+        }
+        public Course GetCourse()
+        {
+            // Retrieve course based on CourseId (assuming data source or service)
+            return new Course(CourseId, "Math 101", "MTH101", "Dr. Smith");
+        }
     }
 }
