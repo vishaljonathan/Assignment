@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F7925120-8D3B-4B5E-B56E-AE5B8CD56D17}</ProjectGuid>
+    <ProjectGuid>{E5AD1397-9014-4517-A2EA-265F7E259153}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>StudentInformationSystem</RootNamespace>
     <AssemblyName>StudentInformationSystem</AssemblyName>
@@ -43,32 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entity\Course.cs" />
-    <Compile Include="Entity\Enrollment.cs" />
-    <Compile Include="Entity\Payment.cs" />
-    <Compile Include="Entity\SIS.cs" />
-    <Compile Include="Entity\Student.cs" />
-    <Compile Include="Entity\Teacher.cs" />
-    <Compile Include="Exception\CourseNotFoundException.cs" />
-    <Compile Include="Exception\DuplicateEnrollmentException.cs" />
-    <Compile Include="Exception\InsufficientFundsExceptiom.cs" />
-    <Compile Include="Exception\InvalidCourseDataException.cs" />
-    <Compile Include="Exception\InvalidEnrollmentDataException.cs" />
-    <Compile Include="Exception\InvalidStudentDataException.cs" />
-    <Compile Include="Exception\InvalidTeacherDataException.cs" />
-    <Compile Include="Exception\PaymentValidationException.cs" />
-    <Compile Include="Exception\StudentNotFoundException.cs" />
-    <Compile Include="Exception\TeacherNotFoundException.cs" />
-    <Compile Include="Main\Program.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DAO\" />
-    <Folder Include="Util\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
