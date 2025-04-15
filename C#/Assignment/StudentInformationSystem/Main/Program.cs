@@ -32,6 +32,7 @@ namespace StudentInformationSystem.Main
                 {
                     switch (choice)
                     {
+                        //Add Student
                         case "1":
                             Console.Write("Enter Student ID: ");
                             if (!int.TryParse(Console.ReadLine(), out int sid))
@@ -65,6 +66,7 @@ namespace StudentInformationSystem.Main
                             Console.WriteLine("Student added successfully.");
                             break;
 
+                        //Add Course
                         case "2":
                             Console.Write("Enter Course ID: ");
                             if (!int.TryParse(Console.ReadLine(), out int cid))
@@ -90,6 +92,7 @@ namespace StudentInformationSystem.Main
                             Console.WriteLine("Course added successfully.");
                             break;
 
+                        //Add Teacher
                         case "3":
                             Console.Write("Enter Teacher ID: ");
                             if (!int.TryParse(Console.ReadLine(), out int tid))
@@ -118,6 +121,7 @@ namespace StudentInformationSystem.Main
                             break;
 
 
+                        //Enroll Student in a course
                         case "4":
                             Console.Write("Enter Student ID: ");
                             if (!int.TryParse(Console.ReadLine(), out sid))
@@ -144,6 +148,7 @@ namespace StudentInformationSystem.Main
                             Console.WriteLine("Enrollment added successfully.");
                             break;
 
+                        //Assign course to teacher
                         case "5":
                             Console.Write("Enter Course ID: ");
                             if (!int.TryParse(Console.ReadLine(), out cid))
@@ -164,6 +169,7 @@ namespace StudentInformationSystem.Main
                             Console.WriteLine("Course assigned to teacher.");
                             break;
 
+                        //Add Payment for Student
                         case "6":
                             Console.Write("Enter Student ID: ");
                             if (!int.TryParse(Console.ReadLine(), out sid))
@@ -189,6 +195,7 @@ namespace StudentInformationSystem.Main
                             Console.WriteLine("Payment added successfully.");
                             break;
 
+                        //View Enrollments for Student
                         case "7":
                             Console.Write("Enter Student ID: ");
                             if (!int.TryParse(Console.ReadLine(), out sid))
@@ -210,6 +217,7 @@ namespace StudentInformationSystem.Main
                             }
                             break;
 
+                        //View Courses for teacher
                         case "8":
                             Console.Write("Enter Teacher ID: ");
                             if (!int.TryParse(Console.ReadLine(), out tid))
