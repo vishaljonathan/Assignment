@@ -12,16 +12,18 @@ namespace StudentInformationSystem.Entity
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
+        public string Expertise { get; set; }
 
         public List<Course> AssignedCourses { get; set; }
 
         // Constructor to initialize attributes
-        public Teacher(int teacherId, string firstName, string lastName, string email)
+        public Teacher(int teacherId, string firstName, string lastName, string email, string exp)
         {
             TeacherId = teacherId;
             FirstName = firstName;
             LastName = lastName;
             Email = email;
+            Expertise = exp;
         }
         public Teacher()
         {

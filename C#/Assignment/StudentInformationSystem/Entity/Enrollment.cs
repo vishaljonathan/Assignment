@@ -29,6 +29,9 @@ namespace StudentInformationSystem.Entity
             Student = student;
             Course = course;
         }
+        public Enrollment() 
+        { 
+        }
 
         // Methods
         public Student GetStudent()

@@ -103,6 +103,8 @@ namespace StudentInformationSystem.Main
                             string tlname = Console.ReadLine();
                             Console.Write("Enter Email: ");
                             string temail = Console.ReadLine();
+                            Console.Write("Enter Expertise: ");
+                            string texpertise = Console.ReadLine();
 
                             if (sis.Teachers.Any(t => t.TeacherId == tid))
                             {
@@ -110,10 +112,11 @@ namespace StudentInformationSystem.Main
                                 break;
                             }
 
-                            Teacher teacher = new Teacher(tid, tfname, tlname, temail);
+                            Teacher teacher = new Teacher(tid, tfname, tlname, temail, texpertise);
                             sis.Teachers.Add(teacher);
                             Console.WriteLine("Teacher added successfully.");
                             break;
+
 
                         case "4":
                             Console.Write("Enter Student ID: ");
