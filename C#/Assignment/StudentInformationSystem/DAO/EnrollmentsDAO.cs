@@ -118,7 +118,7 @@ namespace StudentInformationSystem.DAO
             }
         }
 
-        // Method to generate and display or save the enrollment report
+        // Method to generate and display the enrollment report
         public void GenerateAndDisplayReport(string courseName)
         {
             List<Student> students = GetEnrollmentReport(courseName);
@@ -138,9 +138,6 @@ namespace StudentInformationSystem.DAO
             {
                 Console.WriteLine($"{student.StudentId} | {student.FirstName} | {student.LastName} | {student.Email} | {student.PhoneNumber}");
             }
-
-            // You can implement functionality to save the report to a file if needed
-            // Example: SaveReportToFile(students);
         }
 
         //Update Enrollment
