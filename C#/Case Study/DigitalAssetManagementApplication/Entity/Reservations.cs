@@ -25,5 +25,42 @@ namespace DigitalAssetManagementApplication.Entity
             EndDate = endDate;
             Status = status;
         }
+
+        // Method to reserve an asset for an employee
+        public static void ReserveAsset(Assets asset, Employees employee, DateTime reservationDate, DateTime startDate, DateTime endDate)
+        {
+            if (asset.Status != "Available")
+            {
+                throw new InvalidOperationException("Asset is not available for reservation.");
+            }
+
+            var reservation = new Reservations(
+                reservationId: new Random().Next(1000, 9999),
+                assetId: asset,
+                employeeId: employee,
+                reservationDate: reservationDate,
+                startDate: startDate,
+                endDate: endDate,
+                status: "Reserved"
+            );
+
+            asset.Reservations.Add(reservation);
+            asset.Status = "Reserved";
+        }
+
+        // Method to withdraw a reservation
+        public static void WithdrawReservation(Assets asset, int reservationId)
+        {
+            var reservation = asset.Reservations.FirstOrDefault(r => r.ReservationID == reservationId);
+            if (reservation != null)
+            {
+                asset.Reservations.Remove(reservation);
+                asset.Status = "Available";
+            }
+            else
+            {
+                throw new InvalidOperationException("Reservation not found.");
+            }
+        }
     }
 }

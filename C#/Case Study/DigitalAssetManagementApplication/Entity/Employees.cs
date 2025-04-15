@@ -13,6 +13,7 @@ namespace DigitalAssetManagementApplication.Entity
         public string Department { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public List<Assets> AssetsOwned { get; set; } = new List<Assets>();
         public Employees(int employeeId, string name, string department, string email, string password)
         {
             EmployeeID = employeeId;

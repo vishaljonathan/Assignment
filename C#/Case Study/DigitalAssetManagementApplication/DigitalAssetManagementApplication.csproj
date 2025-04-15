@@ -48,7 +48,8 @@
     <Compile Include="Entity\Employees.cs" />
     <Compile Include="Entity\MaintenanceRecords.cs" />
     <Compile Include="Entity\Reservations.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="MyExceptions\Exceptions.cs" />
+    <Compile Include="Main\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

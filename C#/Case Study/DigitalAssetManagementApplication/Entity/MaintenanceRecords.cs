@@ -21,5 +21,19 @@ namespace DigitalAssetManagementApplication.Entity
             Description = description;
             Cost = cost;
         }
+        
+        // Method to perform maintenance on an asset
+        public static void PerformMaintenance(Assets asset, DateTime maintenanceDate, string description, decimal cost)
+        {
+            var maintenance = new MaintenanceRecords(
+                maintenanceId: new Random().Next(1000, 9999),
+                assetId: asset,
+                maintenanceDate: maintenanceDate,
+                description: description,
+                cost: cost
+            );
+
+            asset.MaintenanceRecords.Add(maintenance);
+        }
     }
 }
