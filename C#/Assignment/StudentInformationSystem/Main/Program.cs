@@ -14,7 +14,7 @@ namespace StudentInformationSystem.Main
 
             while (flag)
             {
-                Console.WriteLine("\n--- Student Information System Menu ---");
+                Console.WriteLine("\n--- Student Information System ---");
                 Console.WriteLine("1. Add Student");
                 Console.WriteLine("2. Add Course");
                 Console.WriteLine("3. Add Teacher");
