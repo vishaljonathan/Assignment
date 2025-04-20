@@ -4,19 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DigitalAssetManagementApplication.Entity
+namespace DigitalAssetManagement.Entity
 {
-    public class Employees
+    public class Employee
     {
-        public int EmployeeID { get; set; }
+        public int EmployeeId { get; set; }
         public string Name { get; set; }
         public string Department { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public List<Assets> AssetsOwned { get; set; } = new List<Assets>();
-        public Employees(int employeeId, string name, string department, string email, string password)
+
+        public Employee() { }
+
+        public Employee(int employeeId, string name, string department, string email, string password)
         {
-            EmployeeID = employeeId;
+            EmployeeId = employeeId;
             Name = name;
             Department = department;
             Email = email;
