@@ -1,11 +1,6 @@
 ﻿using DigitalAssetManagement.Dao;
 using DigitalAssetManagement.Entity;
 using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static DigitalAssetManagement.MyExceptions.Exception;
 
 namespace DigitalAssetManagement.Main
@@ -22,6 +17,7 @@ namespace DigitalAssetManagement.Main
                 try
                 {
                     Console.WriteLine("\n--- Digital Asset Management System ---");
+                    Console.WriteLine("Welcome! Select a choice from the below menu:");
                     Console.WriteLine("1. Add Asset");
                     Console.WriteLine("2. Update Asset");
                     Console.WriteLine("3. Delete Asset");
