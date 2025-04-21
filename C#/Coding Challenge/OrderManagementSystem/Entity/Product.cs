@@ -26,5 +26,14 @@ namespace OrderManagementSystem.Entity
             QuantityInStock = quantityInStock;
             Type = type;
         }
+
+        public Product(string productName, string description, decimal price, int quantityInStock, string type)
+        {
+            ProductName = productName;
+            Description = description;
+            Price = price;
+            QuantityInStock = quantityInStock;
+            Type = type;
+        }
     }
 }

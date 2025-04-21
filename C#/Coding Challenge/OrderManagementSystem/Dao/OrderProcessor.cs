@@ -1,11 +1,9 @@
 ﻿using Microsoft.Data.SqlClient;
 using OrderManagementSystem.Entity;
 using OrderManagementSystem.Util;
+using OrderManagementSystem.Exceptions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrderManagementSystem.Dao
 {
@@ -37,11 +35,11 @@ namespace OrderManagementSystem.Dao
             }
             catch (SqlException ex)
             {
-                Console.WriteLine($"SQL Error in CreateUser: {ex.Message}");
+                Console.WriteLine("Database error while creating user: " + ex.Message);
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
-                Console.WriteLine($"Unexpected error in CreateUser: {ex.Message}");
+                Console.WriteLine("Unexpected error while creating user: " + ex.Message);
             }
         }
 
@@ -72,7 +70,6 @@ namespace OrderManagementSystem.Dao
                         command.Parameters.AddWithValue("@ProductId", productId);
                         command.Parameters.AddWithValue("@Brand", "ExampleBrand");
                         command.Parameters.AddWithValue("@WarrantyPeriod", 2);
-
                         command.ExecuteNonQuery();
                     }
                     else if (product.Type.ToLower() == "clothing")
@@ -82,18 +79,17 @@ namespace OrderManagementSystem.Dao
                         command.Parameters.AddWithValue("@ProductId", productId);
                         command.Parameters.AddWithValue("@Size", "L");
                         command.Parameters.AddWithValue("@Color", "Red");
-
                         command.ExecuteNonQuery();
                     }
                 }
             }
             catch (SqlException ex)
             {
-                Console.WriteLine($"SQL Error in CreateProduct: {ex.Message}");
+                Console.WriteLine("Database error while creating product: " + ex.Message);
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
-                Console.WriteLine($"Unexpected error in CreateProduct: {ex.Message}");
+                Console.WriteLine("Unexpected error while creating product: " + ex.Message);
             }
         }
 
@@ -104,12 +100,22 @@ namespace OrderManagementSystem.Dao
             {
                 using (var connection = new SqlConnection(_connectionString))
                 {
+                    connection.Open();
+
+                    // Check if user exists
+                    string userCheckQuery = "SELECT COUNT(*) FROM Users WHERE UserId = @UserId";
+                    SqlCommand userCheckCmd = new SqlCommand(userCheckQuery, connection);
+                    userCheckCmd.Parameters.AddWithValue("@UserId", user.UserId);
+                    int userExists = (int)userCheckCmd.ExecuteScalar();
+
+                    if (userExists == 0)
+                        throw new UserNotFoundException();
+
                     string query = "INSERT INTO Orders (UserId, OrderDate) VALUES (@UserId, @OrderDate); SELECT SCOPE_IDENTITY();";
                     SqlCommand command = new SqlCommand(query, connection);
                     command.Parameters.AddWithValue("@UserId", user.UserId);
                     command.Parameters.AddWithValue("@OrderDate", DateTime.Now);
 
-                    connection.Open();
                     int orderId = Convert.ToInt32(command.ExecuteScalar());
 
                     foreach (var product in products)
@@ -119,18 +125,21 @@ namespace OrderManagementSystem.Dao
                         command.Parameters.AddWithValue("@OrderId", orderId);
                         command.Parameters.AddWithValue("@ProductId", product.ProductId);
                         command.Parameters.AddWithValue("@Quantity", 1);
-
                         command.ExecuteNonQuery();
                     }
                 }
             }
+            catch (UserNotFoundException ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
             catch (SqlException ex)
             {
-                Console.WriteLine($"SQL Error in CreateOrder: {ex.Message}");
+                Console.WriteLine("Database error while creating order: " + ex.Message);
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
-                Console.WriteLine($"Unexpected error in CreateOrder: {ex.Message}");
+                Console.WriteLine("Unexpected error while creating order: " + ex.Message);
             }
         }
 
@@ -141,22 +150,37 @@ namespace OrderManagementSystem.Dao
             {
                 using (var connection = new SqlConnection(_connectionString))
                 {
+                    connection.Open();
+
+                    // Check if order exists
+                    string checkQuery = "SELECT COUNT(*) FROM Orders WHERE OrderId = @OrderId AND UserId = @UserId";
+                    SqlCommand checkCmd = new SqlCommand(checkQuery, connection);
+                    checkCmd.Parameters.AddWithValue("@OrderId", orderId);
+                    checkCmd.Parameters.AddWithValue("@UserId", userId);
+                    int orderExists = (int)checkCmd.ExecuteScalar();
+
+                    if (orderExists == 0)
+                        throw new OrderNotFoundException();
+
                     string query = "DELETE FROM OrderItems WHERE OrderId = @OrderId; DELETE FROM Orders WHERE OrderId = @OrderId AND UserId = @UserId";
                     SqlCommand command = new SqlCommand(query, connection);
                     command.Parameters.AddWithValue("@OrderId", orderId);
                     command.Parameters.AddWithValue("@UserId", userId);
 
-                    connection.Open();
                     command.ExecuteNonQuery();
                 }
             }
+            catch (OrderNotFoundException ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
             catch (SqlException ex)
             {
-                Console.WriteLine($"SQL Error in CancelOrder: {ex.Message}");
+                Console.WriteLine("Database error while canceling order: " + ex.Message);
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
-                Console.WriteLine($"Unexpected error in CancelOrder: {ex.Message}");
+                Console.WriteLine("Unexpected error while canceling order: " + ex.Message);
             }
         }
 
@@ -190,16 +214,16 @@ namespace OrderManagementSystem.Dao
             }
             catch (SqlException ex)
             {
-                Console.WriteLine($"SQL Error in GetAllProducts: {ex.Message}");
+                Console.WriteLine("Database error while fetching products: " + ex.Message);
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
-                Console.WriteLine($"Unexpected error in GetAllProducts: {ex.Message}");
+                Console.WriteLine("Unexpected error while fetching products: " + ex.Message);
             }
             return products;
         }
 
-        // Get Order by User
+        // Get Orders by User
         public List<Product> GetOrderByUser(User user)
         {
             List<Product> products = new List<Product>();
@@ -234,11 +258,11 @@ namespace OrderManagementSystem.Dao
             }
             catch (SqlException ex)
             {
-                Console.WriteLine($"SQL Error in GetOrderByUser: {ex.Message}");
+                Console.WriteLine("Database error while retrieving order by user: " + ex.Message);
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
-                Console.WriteLine($"Unexpected error in GetOrderByUser: {ex.Message}");
+                Console.WriteLine("Unexpected error while retrieving order by user: " + ex.Message);
             }
             return products;
         }

@@ -2,9 +2,6 @@
 using OrderManagementSystem.Entity;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrderManagementSystem.Main
 {
@@ -17,9 +14,11 @@ namespace OrderManagementSystem.Main
             string configFile = "AppSettings.json";
             _orderProcessor = new OrderProcessor(configFile);
 
-            while (true)
+            bool exit = false;
+
+            while (!exit)
             {
-                Console.WriteLine("\n---- Order Management System Menu ---");
+                Console.WriteLine("\n---- Order Management System Menu ----");
                 Console.WriteLine("1. Create User");
                 Console.WriteLine("2. Create Product");
                 Console.WriteLine("3. Cancel Order");
@@ -29,76 +28,52 @@ namespace OrderManagementSystem.Main
                 Console.Write("Please enter your choice (1-6): ");
 
                 string choice = Console.ReadLine();
+                Console.WriteLine();
 
-                switch (choice)
+                try
                 {
-                    case "1":
-                        try
-                        {
+                    switch (choice)
+                    {
+                        case "1":
                             CreateUser();
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine("Error in CreateUser: " + ex.Message);
-                        }
-                        break;
-                    case "2":
-                        try
-                        {
+                            break;
+                        case "2":
                             CreateProduct();
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine("Error in CreateProduct: " + ex.Message);
-                        }
-                        break;
-                    case "3":
-                        try
-                        {
+                            break;
+                        case "3":
                             CancelOrder();
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine("Error in CancelOrder: " + ex.Message);
-                        }
-                        break;
-                    case "4":
-                        try
-                        {
+                            break;
+                        case "4":
                             GetAllProducts();
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine("Error in GetAllProducts: " + ex.Message);
-                        }
-                        break;
-                    case "5":
-                        try
-                        {
+                            break;
+                        case "5":
                             GetOrderByUser();
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine("Error in GetOrderByUser: " + ex.Message);
-                        }
-                        break;
-                    case "6":
-                        Console.WriteLine("Exiting Order Management System.");
-                        return;
-                    default:
-                        Console.WriteLine("Invalid choice, please try again.");
-                        break;
+                            break;
+                        case "6":
+                            Console.WriteLine("Exiting Order Management System.");
+                            exit = true;
+                            break;
+                        default:
+                            Console.WriteLine("Invalid choice, please try again.");
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("An error occurred: " + ex.Message);
                 }
             }
         }
 
         private static void CreateUser()
         {
-            Console.WriteLine("\n--- Create User ---");
+            Console.WriteLine("--- Create User ---");
             Console.Write("Enter Username: ");
             string username = Console.ReadLine();
+
             Console.Write("Enter Password: ");
             string password = Console.ReadLine();
+
             Console.Write("Enter Role (e.g., Admin, Customer): ");
             string role = Console.ReadLine();
 
@@ -115,41 +90,46 @@ namespace OrderManagementSystem.Main
 
         private static void CreateProduct()
         {
-            Console.WriteLine("\n--- Create Product ---");
-
+            Console.WriteLine("--- Create Product ---");
             Console.Write("Enter User ID (creating the product): ");
             int userId = Convert.ToInt32(Console.ReadLine());
 
             Console.Write("Enter Product Name: ");
-            string productName = Console.ReadLine();
+            string name = Console.ReadLine();
+
             Console.Write("Enter Product Description: ");
             string description = Console.ReadLine();
+
             Console.Write("Enter Product Price: ");
             decimal price = Convert.ToDecimal(Console.ReadLine());
+
             Console.Write("Enter Quantity in Stock: ");
-            int quantityInStock = Convert.ToInt32(Console.ReadLine());
+            int quantity = Convert.ToInt32(Console.ReadLine());
+
             Console.Write("Enter Product Type (e.g., Electronics, Clothing): ");
             string type = Console.ReadLine();
 
-            User user = new User { UserId = userId };
-            Product newProduct = new Product
+            Product product = new Product
             {
-                ProductName = productName,
+                ProductName = name,
                 Description = description,
                 Price = price,
-                QuantityInStock = quantityInStock,
+                QuantityInStock = quantity,
                 Type = type
             };
 
-            _orderProcessor.CreateProduct(user, newProduct);
+            User user = new User { UserId = userId };
+
+            _orderProcessor.CreateProduct(user, product);
             Console.WriteLine("Product created successfully.");
         }
 
         private static void CancelOrder()
         {
-            Console.WriteLine("\n--- Cancel Order ---");
+            Console.WriteLine("--- Cancel Order ---");
             Console.Write("Enter User ID: ");
             int userId = Convert.ToInt32(Console.ReadLine());
+
             Console.Write("Enter Order ID: ");
             int orderId = Convert.ToInt32(Console.ReadLine());
 
@@ -159,28 +139,38 @@ namespace OrderManagementSystem.Main
 
         private static void GetAllProducts()
         {
-            Console.WriteLine("\n--- Get All Products ---");
+            Console.WriteLine("--- All Products ---");
             List<Product> products = _orderProcessor.GetAllProducts();
 
-            Console.WriteLine("List of Products:");
-            foreach (var product in products)
+            if (products.Count == 0)
             {
-                Console.WriteLine($"ID: {product.ProductId}, Name: {product.ProductName}, Price: {product.Price}, Quantity: {product.QuantityInStock}, Type: {product.Type}");
+                Console.WriteLine("No products available.");
+                return;
+            }
+
+            foreach (var p in products)
+            {
+                Console.WriteLine($"ID: {p.ProductId}, Name: {p.ProductName}, Price: {p.Price}, Quantity: {p.QuantityInStock}, Type: {p.Type}");
             }
         }
 
         private static void GetOrderByUser()
         {
-            Console.WriteLine("\n--- Get Orders By User ---");
+            Console.WriteLine("--- Get Orders By User ---");
             Console.Write("Enter User ID: ");
             int userId = Convert.ToInt32(Console.ReadLine());
 
-            List<Product> products = _orderProcessor.GetOrderByUser(new User { UserId = userId });
+            List<Product> orders = _orderProcessor.GetOrderByUser(new User { UserId = userId });
 
-            Console.WriteLine("User's Orders:");
-            foreach (var product in products)
+            if (orders.Count == 0)
             {
-                Console.WriteLine($"Product ID: {product.ProductId}, Product Name: {product.ProductName}, Price: {product.Price}, Quantity: {product.QuantityInStock}");
+                Console.WriteLine("No orders found for this user.");
+                return;
+            }
+
+            foreach (var product in orders)
+            {
+                Console.WriteLine($"Product ID: {product.ProductId}, Name: {product.ProductName}, Price: {product.Price}, Quantity: {product.QuantityInStock}");
             }
         }
     }
