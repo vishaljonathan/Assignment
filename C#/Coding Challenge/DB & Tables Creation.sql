@@ -40,7 +40,7 @@ CREATE TABLE Clothing (
 
 --Create Orders Table
 CREATE TABLE Orders (
-    OrderId INT PRIMARY KEY IDENTITY,
+    OrderId INT PRIMARY KEY IDENTITY(300,1),
     UserId INT,
     OrderDate DATETIME,
     FOREIGN KEY (UserId) REFERENCES Users(UserId)
@@ -48,7 +48,7 @@ CREATE TABLE Orders (
 
 --Create OrderItems Table
 CREATE TABLE OrderItems (
-    OrderItemId INT PRIMARY KEY IDENTITY(300,1),
+    OrderItemId INT PRIMARY KEY IDENTITY(400,1),
     OrderId INT,
     ProductId INT,
     Quantity INT,
