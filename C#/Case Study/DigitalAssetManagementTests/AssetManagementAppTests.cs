@@ -108,8 +108,8 @@ namespace DigitalAssetManagement.Tests
             // Arrange
             Reservation reservation = new Reservation
             {
-                AssetId = 202,
-                EmployeeId = 102, // Invalid EmployeeId (non-existent)
+                AssetId = 2000,
+                EmployeeId = 1022, // Invalid EmployeeId (non-existent)
                 ReservationDate = DateTime.Now,  // Use DateTime directly
                 StartDate = DateTime.Now.AddDays(1),  // Use DateTime directly
                 EndDate = DateTime.Now.AddDays(7)  // Use DateTime directly
