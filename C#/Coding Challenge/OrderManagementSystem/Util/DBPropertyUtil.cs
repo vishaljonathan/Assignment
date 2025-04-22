@@ -17,6 +17,10 @@ namespace OrderManagementSystem.Util
                 .AddJsonFile(filePath);
             var config = builder.Build();
             var connectionString = config.GetConnectionString("DefaultConnection");
+
+            // Add a debug log to check the connection string
+            Console.WriteLine("Connection String: " + connectionString);
+
             return connectionString;
         }
     }

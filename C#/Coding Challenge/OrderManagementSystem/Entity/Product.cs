@@ -15,6 +15,14 @@ namespace OrderManagementSystem.Entity
         public int QuantityInStock { get; set; }
         public string Type { get; set; }
 
+        // Additional properties for Electronics
+        public string Brand { get; set; }
+        public int WarrantyPeriod { get; set; }
+
+        // Additional properties for Clothing
+        public string Size { get; set; }
+        public string Color { get; set; }
+
         public Product() { }
 
         public Product(int productId, string productName, string description, decimal price, int quantityInStock, string type)

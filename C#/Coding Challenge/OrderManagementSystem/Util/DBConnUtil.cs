@@ -12,7 +12,7 @@ namespace OrderManagementSystem.Util
         public static SqlConnection GetConnection(string configFile)
         {
             SqlConnection sqlConnection;
-            string connstr = DBPropertyUtil.GetConnectionString(configFile);
+            string connstr = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=OMS;Integrated Security=True;"; ;
             return new SqlConnection(connstr);
         }
     }

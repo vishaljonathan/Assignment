@@ -10,10 +10,12 @@ namespace OrderManagementSystem.Dao
     public class OrderProcessor : IOrderManagementRepository
     {
         private readonly string _connectionString;
+        private SqlConnection sqlCon;
 
-        public OrderProcessor(string connectionString)
+        public OrderProcessor(string configFile)
         {
-            _connectionString = connectionString;
+            _connectionString = DBConnUtil.GetConnection(configFile).ConnectionString;
+            sqlCon = new SqlConnection(_connectionString); // Initialize sqlCon with the connection string
         }
 
         // Create User
@@ -68,8 +70,8 @@ namespace OrderManagementSystem.Dao
                         query = "INSERT INTO Electronics (ProductId, Brand, WarrantyPeriod) VALUES (@ProductId, @Brand, @WarrantyPeriod)";
                         command = new SqlCommand(query, connection);
                         command.Parameters.AddWithValue("@ProductId", productId);
-                        command.Parameters.AddWithValue("@Brand", "ExampleBrand");
-                        command.Parameters.AddWithValue("@WarrantyPeriod", 2);
+                        command.Parameters.AddWithValue("@Brand", product.Brand);
+                        command.Parameters.AddWithValue("@WarrantyPeriod", product.WarrantyPeriod);
                         command.ExecuteNonQuery();
                     }
                     else if (product.Type.ToLower() == "clothing")
@@ -77,8 +79,8 @@ namespace OrderManagementSystem.Dao
                         query = "INSERT INTO Clothing (ProductId, Size, Color) VALUES (@ProductId, @Size, @Color)";
                         command = new SqlCommand(query, connection);
                         command.Parameters.AddWithValue("@ProductId", productId);
-                        command.Parameters.AddWithValue("@Size", "L");
-                        command.Parameters.AddWithValue("@Color", "Red");
+                        command.Parameters.AddWithValue("@Size", product.Size);
+                        command.Parameters.AddWithValue("@Color", product.Color);
                         command.ExecuteNonQuery();
                     }
                 }
@@ -92,6 +94,7 @@ namespace OrderManagementSystem.Dao
                 Console.WriteLine("Unexpected error while creating product: " + ex.Message);
             }
         }
+
 
         // Create Order
         public void CreateOrder(User user, List<Product> products)
@@ -124,7 +127,7 @@ namespace OrderManagementSystem.Dao
                         command = new SqlCommand(query, connection);
                         command.Parameters.AddWithValue("@OrderId", orderId);
                         command.Parameters.AddWithValue("@ProductId", product.ProductId);
-                        command.Parameters.AddWithValue("@Quantity", 1);
+                        command.Parameters.AddWithValue("@Quantity", 1); // Adjust this based on the actual product quantity
                         command.ExecuteNonQuery();
                     }
                 }
@@ -223,7 +226,6 @@ namespace OrderManagementSystem.Dao
             return products;
         }
 
-        // Get Orders by User
         public List<Product> GetOrderByUser(User user)
         {
             List<Product> products = new List<Product>();
@@ -264,7 +266,9 @@ namespace OrderManagementSystem.Dao
             {
                 Console.WriteLine("Unexpected error while retrieving order by user: " + ex.Message);
             }
-            return products;
+            return products; // Ensure you're returning a List<Product> here
         }
     }
 }
+
+
