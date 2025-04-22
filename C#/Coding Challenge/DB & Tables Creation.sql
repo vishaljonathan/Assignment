@@ -48,7 +48,7 @@ CREATE TABLE Orders (
 
 --Create OrderItems Table
 CREATE TABLE OrderItems (
-    OrderItemId INT PRIMARY KEY IDENTITY,
+    OrderItemId INT PRIMARY KEY IDENTITY(300,1),
     OrderId INT,
     ProductId INT,
     Quantity INT,

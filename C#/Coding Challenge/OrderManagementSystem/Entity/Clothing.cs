@@ -20,5 +20,11 @@ namespace OrderManagementSystem.Entity
             Size = size;
             Color = color;
         }
+
+        public Clothing(string size, string color)
+        {
+            Size = size;
+            Color = color;
+        }
     }
 }

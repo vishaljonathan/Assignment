@@ -22,5 +22,11 @@ namespace OrderManagementSystem.Entity
             ProductId = productId;
             Quantity = quantity;
         }
+
+        public OrderItem(int orderItemId, int quantity)
+        {
+            OrderItemId = orderItemId;
+            Quantity = quantity;
+        }
     }
 }

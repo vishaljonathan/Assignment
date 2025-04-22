@@ -20,5 +20,11 @@ namespace OrderManagementSystem.Entity
             Brand = brand;
             WarrantyPeriod = warrantyPeriod;
         }
+
+        public Electronics(string brand, int warrantyPeriod)
+        {
+            Brand = brand;
+            WarrantyPeriod = warrantyPeriod;
+        }
     }
 }

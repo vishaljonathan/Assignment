@@ -20,5 +20,10 @@ namespace OrderManagementSystem.Entity
             UserId = userId;
             OrderDate = orderDate;
         }
+
+        public Order(DateTime orderDate)
+        {
+            OrderDate = orderDate;
+        }
     }
 }
