@@ -115,10 +115,25 @@ namespace DigitalAssetManagement.Main
             Console.Write("Enter Owner ID: ");
             newAsset.OwnerId = Convert.ToInt32(Console.ReadLine());
 
-            if (service.AddAsset(newAsset))
-                Console.WriteLine("Asset added successfully.");
-            else
-                throw new Exception("Asset could not be added.");
+            try
+            {
+                if (service.AddAsset(newAsset))
+                {
+                    Console.WriteLine("Asset added successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("Asset could not be added.");
+                }
+            }
+            catch (AssetNotFoundException ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"General error: {ex.Message}");
+            }
         }
 
         private static void UpdateAsset(IAssetManagementService service)

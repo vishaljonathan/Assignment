@@ -1,6 +1,7 @@
 ﻿using DigitalAssetManagement.Entity;
 using DigitalAssetManagement.Util;
 using Microsoft.Data.SqlClient;
+using static DigitalAssetManagement.MyExceptions.Exception;
 
 namespace DigitalAssetManagement.Dao
 {
@@ -18,6 +19,20 @@ namespace DigitalAssetManagement.Dao
         {
             try
             {
+                // Check if the OwnerId exists in the database before attempting to insert
+                string checkOwnerQuery = "SELECT COUNT(*) FROM Employees WHERE employee_id = @OwnerId";
+                using (SqlCommand cmd = new SqlCommand(checkOwnerQuery, connection))
+                {
+                    cmd.Parameters.AddWithValue("@OwnerId", asset.OwnerId);
+
+                    int ownerCount = (int)cmd.ExecuteScalar();
+                    if (ownerCount == 0)
+                    {
+                        throw new AssetNotFoundException("Asset could not be added due to invalid OwnerId.");
+                    }
+                }
+
+                // If the OwnerId is valid, proceed to add the asset
                 string query = "INSERT INTO Assets (name, type, serial_number, purchase_date, location, status, owner_id) " +
                                "VALUES (@Name, @Type, @SerialNumber, @PurchaseDate, @Location, @Status, @OwnerId)";
 
@@ -35,12 +50,23 @@ namespace DigitalAssetManagement.Dao
                     return result > 0; // Returns true if at least one row is affected
                 }
             }
+            catch (SqlException ex)
+            {
+                Console.WriteLine($"SQL error adding asset: {ex.Message}");
+                return false;
+            }
+            catch (AssetNotFoundException ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                return false;
+            }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error adding asset: {ex.Message}");
+                Console.WriteLine($"General error adding asset: {ex.Message}");
                 return false;
             }
         }
+
 
         public bool UpdateAsset(Asset asset)
         {
