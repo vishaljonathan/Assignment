@@ -22,6 +22,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="DigitalAssetManagement">
+      <HintPath>..\DigitalAssetManagement\bin\Debug\net8.0\DigitalAssetManagement.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="NUnit.Framework" />
   </ItemGroup>
 
