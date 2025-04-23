@@ -83,24 +83,16 @@ namespace DigitalAssetManagement.Tests
 
         // Test case for handling exception when asset ID or employee ID not found
         [Test]
-        public void AddAsset_ShouldThrowExceptionWhenAssetNotFound()
+        public void DeleteAsset_ShouldThrowExceptionWhenAssetNotFound()
         {
             // Arrange
-            Asset newAsset = new Asset
-            {
-                Name = "Projector",
-                Type = "Electronics",
-                SerialNumber = "2023456456",
-                PurchaseDate = DateTime.Now,  // Use DateTime directly
-                Location = "Room 102",
-                Status = "Available",
-                OwnerId = 2000 // Invalid OwnerId (non-existent)
-            };
+            int invalidAssetId = 9999; // Non-existent AssetId
 
             // Act & Assert
-            var ex = Assert.Throws<AssetNotFoundException>(() => _service.AddAsset(newAsset));
-            Assert.AreEqual("Asset could not be added due to invalid OwnerId.", ex.Message);
+            var ex = Assert.Throws<AssetNotFoundException>(() => _service.DeleteAsset(invalidAssetId));
+            Assert.AreEqual("Asset not found.", ex.Message);
         }
+
 
         [Test]
         public void ReserveAsset_ShouldThrowExceptionWhenEmployeeIdNotFound()
@@ -108,7 +100,7 @@ namespace DigitalAssetManagement.Tests
             // Arrange
             Reservation reservation = new Reservation
             {
-                AssetId = 2000,
+                AssetId = 201,
                 EmployeeId = 1022, // Invalid EmployeeId (non-existent)
                 ReservationDate = DateTime.Now,  // Use DateTime directly
                 StartDate = DateTime.Now.AddDays(1),  // Use DateTime directly
@@ -116,8 +108,18 @@ namespace DigitalAssetManagement.Tests
             };
 
             // Act & Assert
-            var ex = Assert.Throws<AssetNotFoundException>(() => _service.ReserveAsset(reservation.AssetId, reservation.EmployeeId, reservation.ReservationDate.ToString("yyyy-MM-dd"), reservation.StartDate.ToString("yyyy-MM-dd"), reservation.EndDate.ToString("yyyy-MM-dd")));
-            Assert.AreEqual("Asset not found.", ex.Message);
+            var ex = Assert.Throws<EmployeeNotFoundException>(() =>
+                _service.ReserveAsset(
+                    reservation.AssetId,
+                    reservation.EmployeeId,
+                    reservation.ReservationDate.ToString("yyyy-MM-dd"),
+                    reservation.StartDate.ToString("yyyy-MM-dd"),
+                    reservation.EndDate.ToString("yyyy-MM-dd")
+                )
+            );
+
+            Assert.AreEqual("Employee not found.", ex.Message);
         }
+
     }
 }
