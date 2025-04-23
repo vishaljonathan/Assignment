@@ -18,6 +18,9 @@
             public AssetNotMaintainException(string message)
                 : base(message) { }
         }
-
+        public class EmployeeNotFoundException : System.Exception
+        {
+            public EmployeeNotFoundException(string message) : base(message) { }
+        }
     }
 }

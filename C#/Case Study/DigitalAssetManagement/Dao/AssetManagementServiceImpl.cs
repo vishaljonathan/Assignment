@@ -108,8 +108,20 @@ namespace DigitalAssetManagement.Dao
                 {
                     cmd.Parameters.AddWithValue("@AssetId", assetId);
                     int result = cmd.ExecuteNonQuery();
-                    return result > 0; // Returns true if the asset was deleted
+
+                    if (result == 0)
+                    {
+                        // No rows were affected => asset not found
+                        throw new AssetNotFoundException("Asset not found.");
+                    }
+
+                    return true; // Asset deleted successfully
                 }
+            }
+            catch (AssetNotFoundException)
+            {
+                // Re-throw to be handled by caller/test
+                throw;
             }
             catch (Exception ex)
             {
@@ -117,6 +129,7 @@ namespace DigitalAssetManagement.Dao
                 return false;
             }
         }
+
 
         public bool AllocateAsset(int assetId, int employeeId, string allocationDate)
         {
@@ -210,12 +223,29 @@ namespace DigitalAssetManagement.Dao
                     return result > 0; // Returns true if the reservation was successful
                 }
             }
+            catch (SqlException sqlEx)
+            {
+                if (sqlEx.Message.Contains("FK_Asset_ID"))
+                {
+                    throw new AssetNotFoundException("Asset not found.");
+                }
+                else if (sqlEx.Message.Contains("FK_Employee_ID"))
+                {
+                    throw new EmployeeNotFoundException("Employee not found.");
+                }
+                else
+                {
+                    Console.WriteLine($"SQL Error reserving asset: {sqlEx.Message}");
+                    return false;
+                }
+            }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error reserving asset: {ex.Message}");
                 return false;
             }
         }
+
 
         public bool WithdrawReservation(int reservationId)
         {
